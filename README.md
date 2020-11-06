@@ -2,6 +2,10 @@
 Assorted files from my capstone project for my MS Thesis at UCLA.
 
 ## Table of Contents
+* [Summary](#summary)
+* [Background and Data Setup](#background-and-data-setup)
+* [Classifier Overview](#classifier-overview)
+* [Conclusion](#conclusion)
 
 ## Summary
 My final year MS thesis examined automation of the study of nonverbal communication through computer vision and machine learning, allowing for better speed and precision. The developed automated classification pipeline was run on video footage of the first and third presidential debates between Donald Trump and Hillary Clinton to gauge its accuracy. Results showed the automated pipeline is viable as an easily upscaled replacement for human work, able to both reproduce the results of human labeling of the footage and allow for insight into the various nonverbal idiosyncrasies of the speakers with a high average accuracy (approx. 84% across both candidates).
@@ -22,7 +26,7 @@ In the below image, we can see how many body points that OpenPose breaks the hum
 
 Original annotations for classification (which sentiments were to be checked for, which gestures could be meaningful, etc.) ere determined by experienced academics in the field of communication, and were aggregated based on scores given by annotators who were vetted for impartiality to American politics. 
 
-## Classifier information
+## Classifier Overview
 The classifier used for this research was a recurrent neural network (RNN), specifically with long short-term memory (LSTM) units which then returned predicted index values for each of the nonverbal cues initially coded for. A standard RNN consists of internal state vectors, referred to as hidden states, that are updated upon processing of an input sequence. When the RNN incorporates LSTMs, another state variable called a cell state occurs in each LSTM. The cell state stores information required over the entire duration of processing of the input sequence, with an LSTM maintaining control over this cell state and updating it when necessary.
 
 In this work, the input at any given timestep is a feature vector of statistics from OpenFace and OpenPose, corresponding to a frame of the analyzed video. The model begins with the first frame of the video and updates cell states and hidden states as it goes through timesteps, storing and passing in those values to the next LSTM for further computation. The values in these states are stored and passed to the computation for the next time step until every element in the input sequence has been processed. 
